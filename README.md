@@ -1,5 +1,5 @@
 # UAV-Drone-Orchestration
-LLM/SLM based uav Swarm 
+LLM/SLM based UAV Swarm 
 
 # Swarm/Drone Orchestration Mission Repository
 
