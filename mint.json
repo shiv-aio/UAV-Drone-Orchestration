@@ -1,0 +1,41 @@
+{
+  "$schema": "https://mintlify.com/schema.json",
+  "name": "Swarm/Drone Orchestration",
+  "theme": "mint",
+  "colors": {
+    "primary": "#01696f",
+    "light": "#f7f6f2",
+    "dark": "#171614"
+  },
+  "navigation": [
+    {
+      "group": "Start",
+      "pages": [
+        "README",
+        "MISSION",
+        "design"
+      ]
+    },
+    {
+      "group": "Architecture",
+      "pages": [
+        "docs/architecture/system-overview",
+        "docs/architecture/layers",
+        "docs/architecture/deployment-topology"
+      ]
+    },
+    {
+      "group": "Operations",
+      "pages": [
+        "docs/operations/phases",
+        "docs/operations/runbooks"
+      ]
+    },
+    {
+      "group": "API",
+      "pages": [
+        "docs/api/connectors-and-mcps"
+      ]
+    }
+  ]
+}
