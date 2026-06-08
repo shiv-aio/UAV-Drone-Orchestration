@@ -1,0 +1,82 @@
+Here is the full Agentic-Base library definition for the SLM/LLM Orchestration for Drone/Swarm project — structured as a formal research-grade module specification, built in phases, team-ready.
+---
+Agentic-Base Library — Full Specification
+ Agentic-Base  is the foundational agent infrastructure library for the entire SLM/LLM Drone/Swarm Orchestration project. It acts as the single source of truth for every agent SDK, class, harness, configuration, and inter-agent contract used across all DPR modules (VPS, DOOAF, IDF).[marktechpost]
+---
+Position in the Architecture
+ Agentic-Base  sits at Layer 0 — below all mission logic, drone controllers, fleet managers, and vision systems. Every module that spawns, invokes, or communicates with an agent imports from Agentic-Base. It is never a runtime service itself — it is a compiled library dependency.[fratepietro]
+
+┌────────────────────────────────────────────────────────────┐
+│                  Mission / Fleet Layer (DPR-3)             │
+├────────────────────────────────────────────────────────────┤
+│              Perception / Control Layer (DPR-1, DPR-2)     │
+├────────────────────────────────────────────────────────────┤
+│         Orchestration Middleware (SLM/LLM Router)          │
+├────────────────────────────────────────────────────────────┤
+│  ◉  AGENTIC-BASE  ← You are here (Layer 0, Foundation)     │
+└────────────────────────────────────────────────────────────┘
+
+Library Structure
+
+agentic_base/
+│
+├── core/
+│   ├── agent_base.py           # Abstract base class: BaseAgent
+│   ├── sub_agent.py            # SubAgent class, parent-child contracts
+│   ├── agent_group.py          # AgentGroup (collective behavior, quorum)
+│   ├── agent_registry.py       # Runtime discovery & registration
+│   └── lifecycle.py            # Spawn → Run → Suspend → Terminate FSM
+│
+├── harness/
+│   ├── harness_base.py         # AgentHarness abstract interface
+│   ├── single_harness.py       # Wraps a single LLM/SLM agent loop
+│   ├── multi_harness.py        # Multi-agent harness (parallel + handoff)
+│   ├── swarm_harness.py        # Swarm-specific harness (decentralized)
+│   └── harness_factory.py      # Auto-detect & instantiate harness type
+│
+├── sdks/
+│   ├── llm_sdk.py              # LLM interface (OpenAI, Azure, Ollama, etc.)
+│   ├── slm_sdk.py              # SLM interface (on-device, edge models)
+│   ├── tool_sdk.py             # Tool/function-call bindings
+│   ├── memory_sdk.py           # Short/long term agent memory abstraction
+│   └── comms_sdk.py            # Inter-agent message bus (pub/sub, RPC)
+│
+├── types/
+│   ├── agent_types.py          # Enum: AgentClass, AgentRole, AgentNature
+│   ├── task_types.py           # TaskSpec, SubTaskSpec, MissionPlan
+│   ├── message_types.py        # AgentMessage, BroadcastMessage, Directive
+│   ├── state_types.py          # AgentState, MemoryFrame, ContextWindow
+│   └── config_types.py         # AgentConfig, HarnessConfig, SwarmConfig
+│
+├── configs/
+│   ├── default_configs.yaml    # Default SDK + harness configurations
+│   ├── swarm_presets.yaml      # Pre-built swarm topology configs
+│   ├── edge_agent_presets.yaml # SLM/on-device agent config presets
+│   └── auto_configurator.py   # Auto-config engine (demand-driven setup)
+│
+├── patterns/
+│   ├── sequential.py           # Sequential pipeline pattern
+│   ├── parallel.py             # MapReduce / parallel fan-out
+│   ├── hierarchical.py         # Top-down orchestrator → sub-agent
+│   ├── consensus.py            # Voting/quorum-based decision pattern
+│   ├── handoff.py              # Agent-to-agent task handoff
+│   └── react_loop.py           # ReAct: Reason → Act → Observe loop
+│
+├── functions/
+│   ├── decompose.py            # Task decomposition functions
+│   ├── aggregate.py            # Result aggregation & merging
+│   ├── route.py                # Routing logic: which agent gets what task
+│   ├── validate.py             # Output validation & schema checking
+│   └── retry.py                # Retry, backoff, fallback strategies
+│
+├── docs/
+│   ├── AGENT_CLASSES.md        # All agent class types documented
+│   ├── HARNESS_GUIDE.md        # How harnesses work + usage guide
+│   ├── SDK_REFERENCE.md        # Full SDK API reference
+│   ├── PATTERNS_GUIDE.md       # Orchestration patterns with examples
+│   └── AUTO_CONFIG.md          # Auto-configuration system docs
+│
+└── __init__.py                 # Public API surface exports
+
+
+
